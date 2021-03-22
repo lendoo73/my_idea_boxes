@@ -1,0 +1,183 @@
+body {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main {
+    min-height: 32vh;
+}
+
+/* ------------------ style navbar ------------------ */
+nav {
+    border-bottom: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    overflow: auto;
+}
+
+/* Separete left and right the menu elements */
+.left-nav a {
+    float: left;
+    vertical-align: middle;
+}
+
+#avatar {
+    width: min-content;
+}
+
+.right-nav a {
+    float: right;
+}
+
+.left-nav a {
+    border-right: 1px solid black;
+}
+
+.right-nav a:not(:last-child) {
+    border-left: 1px solid black;
+}
+
+.right-nav a img {
+    height: 56px;
+    margin-top: -16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+nav a {
+    color: white;
+    height: 24px;
+    width: 16%;
+    text-align: center;
+    padding: 16px 0;
+}
+
+nav a:hover {
+    color: beige;
+    background-color: dimgray;
+}
+
+.left-nav a:hover:last-child {
+    border-right: 1px solid black;
+}
+
+.right-nav a:hover:last-child {
+    border-left: 1px solid black;
+}
+
+/* ------------------ style header ------------------ */
+header {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 34% 64%;
+    grid-gap: 20px;
+    background-color: beige;
+    min-height: 200px;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+}
+
+.header_left,
+.header_right {
+    display: flex;
+    align-items: center;
+}
+
+/* ------------------ style header left side */
+.header_left {
+    position: relative;
+    border-right: 1px solid #ddd;
+}
+
+/* remove default margin */
+header h1 {
+    margin-top: 0;
+}
+
+/* style colleague's avatar */
+.header_left img {
+    padding-left: 10px;
+    max-width: 250px;
+}
+
+.header_right {
+    padding: 10px 0;
+}
+
+/* ------------------ style flash message categories ------------------ */
+#flash {
+    border: 1px solid black;
+    width: 80%;
+    padding: 10px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#flash.success {
+    background-image: linear-gradient(green, white, green);
+}
+
+#flash.inform {
+    background-image: linear-gradient(lightblue, white, lightblue);
+}
+
+#flash.warning {
+    background-image: linear-gradient(yellow, white, yellow);
+}
+
+#flash.error {
+    background-image: linear-gradient(red, white, red);
+}
+
+@media (max-width: 767px) {
+    .header_left img {
+        padding-left: 0px;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    nav a {
+        width: 17%;
+        font-size: 15px;
+    }
+
+    nav a img {
+        height: 50px;
+        margin-top: -12px;
+    }
+
+    nav a img:hover {
+        /* https://codepen.io/sosuke/pen/Pjoqqp */
+        /* add beige color to the icons */
+        filter: invert(5%) sepia(52%) saturate(187%) hue-rotate(14deg) brightness(105%) contrast(92%);
+    } 
+
+    header {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .header_left,
+    .header_right {
+        padding: 0;
+        justify-content: center;
+    }
+
+    header,
+    .grid {
+        display: block;
+    }
+
+    .grid > div {
+        margin-top: 20px;
+    }
+
+    .button {
+        margin: 30px 0;
+        text-align: center;
+    }
+}

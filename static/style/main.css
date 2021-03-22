@@ -1,0 +1,183 @@
+#logo {
+    background-image: none;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 39% 59%;
+    grid-gap: 10px;
+}
+
+#logo img {
+    width: 250px;
+}
+
+.left {
+    text-align: left;
+}
+
+.button {
+    text-align: left;
+    margin-left: 0;
+}
+
+/* --------------------- Idea boxes --------------------- */
+.main header {
+    display: block;
+    background-color: white;
+    text-align: center;
+    min-height: 0;
+    border-bottom: unset;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 10px;
+}
+
+.flex > div {
+    display: flex;         /* This hack will vertically align the content */
+    align-items: center;   /*                                             */
+}
+
+.box_container {
+    background-color: antiquewhite;
+    background-image: linear-gradient(BurlyWood, antiquewhite, BurlyWood);
+    border: 1px solid grey;
+    cursor: pointer;
+}
+
+.box_header .edit,
+.box_header .name,
+.box_header .poster,
+.box_container > div:not(:last-child) {
+    border-right: 1px solid grey;
+}
+
+.box_header .ideas,
+.box_header .close {
+    border-top: 1px solid grey;
+}
+
+
+.edit img {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.name {
+    width: 50%;
+    flex-grow: 8;
+    padding: 15px 10px;
+    justify-content: flex-start;
+}
+
+.poster {
+    width: 285px;
+    justify-content: space-around;   /* centered the poster avatar */
+}
+
+.poster > div {
+    background-size: cover;
+    background-position: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid lightslategray;
+}
+
+.poster p {
+    text-align: center;
+}
+
+.box_header .ideas,
+.box_header .close,
+.box_header .activity {
+    transform: rotate(90deg);
+}
+
+.edit, 
+.ideas,
+.close,
+.activity {
+    min-width: 60px;
+    width: 60px;
+    justify-content: center;
+}
+
+@media (max-width: 767px) {
+    /* turn mobile responsive the idea boxes container */
+    .flex {
+        flex-wrap: wrap;
+    }
+
+    .box_header .flex .name {
+        margin-top: 20px;
+    }
+
+    .flex .name {
+        width: 100%;
+        order: 6;
+        justify-content: center;
+    }
+
+    .flex .poster {
+        width: 50%;
+        flex-grow: 8;
+    }
+    
+    .flex .name,
+    .box_body .box_container .name {
+        border-right: unset;
+        border-top: 1px solid grey;
+    }
+
+    .box_header .flex > div {
+        font-size: 16px;
+    }
+
+    .box_header .ideas,
+    .box_header .close {
+        border-top: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .button {
+        text-align: center;
+        margin: 30px 0;
+    }
+
+    .flex .poster {
+        width: 40%;
+    }
+
+    .edit, 
+    .ideas,
+    .close,
+    .activity {
+        min-width: 40px;
+        width: 40px;
+    } 
+}
+
+@media (max-width: 420px) {
+    .button {
+        width: 90%;
+    }
+
+    .edit, 
+    .ideas,
+    .close,
+    .activity {
+        min-width: 36px;
+        width: 36px;
+    } 
+
+    .flex .poster {
+        width: 35%;
+    }
+
+    .poster > div {
+        width: 36px;
+        height: 36px;
+    }
+}

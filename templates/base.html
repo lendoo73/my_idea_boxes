@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <!-- Force browser to disable caching css -->
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'style/base.css') }} " />
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'style/common.css') }} " />
+        {% block css %}
+        <!-- Link individual css -->
+        {% endblock css %}
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'style/footer.css') }} " />
+        <link rel="icon" href="{{ url_for('static', filename='images/favico.png') }}" />
+        <title>Idea Box</title>
+    </head>
+    <body>
+        <nav>
+            <div class="left-nav">
+                {% for menu, path in nav["left"].items() %}
+                <a href="{{ path }}">{{ menu }}</a>
+                {% endfor %}
+            </div>
+            <div class="right-nav">
+                {% for menu, path in nav["right"].items() %}
+                    <!-- If the user logged in render clickable username and avatar -->
+                    {% if current_user.get_id() and path == "/profile" %}
+                    <a id="avatar" href="/profile/{{ current_user.id }}" title="Your profile" >
+                        {% if current_user.avatar %}
+                        <img src="{{ url_for('static', filename = '/avatars/') }}{{ current_user.id }}.{{ current_user.avatar }}" />
+                        {% else %}
+                        <img src="{{ url_for('static', filename = '/avatars/default.png') }}" />
+                        {% endif %}
+                    </a>
+                    {% else %}
+                    <a href="{{ path }}">{{ menu }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>    
+        </nav>
+        <header>
+            <div class="header_left">
+                <div>
+                    {% block header_left %}
+                    {% endblock header_left %}
+                </div>
+            </div>
+            <div class="header_right">
+                <div>
+                    {% block header_right %}
+                    {% endblock header_right %}
+                    <!-- to get flashed messages -->
+                    {% with messages = get_flashed_messages(with_categories = true) %}
+                        {% for category, message in messages %}
+                            {% if message %}
+                            <div id="flash" class="{{ category }}">
+                                <p>{{ message }}</p>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endwith %}
+                </div>
+            </div>
+        </header>
+        {% block content %}
+        {% endblock content %}
+        <footer> &copy; Developed by Csaba. <span id="developed">   2021</span><span id="presentYear">.</span>
+            <a href="https://www.codecademy.com/profiles/lendoo" target="_blank">
+                <img id="codecademy_logo" src="{{ url_for('static', filename='images/codecademy-white.svg') }}" alt="CodeCademy logo" />
+            </a>
+        </footer>
+        <script src="{{ url_for('static', filename = 'js/footer.js') }}"></script>
+        <script src="{{ url_for('static', filename = 'js/dom.js') }}"></script>
+        <script src="{{ url_for('static', filename = 'js/device.js') }}"></script>
+        <script src="{{ url_for('static', filename = 'js/base.js') }}"></script>
+        {% block script %}
+        {% endblock script %}
+    </body>
+</html>
+
+<!--
+Add privilegs icon: logomakr.com/0DzUMk 
+Home icon         : logomakr.com/793K3x
+Sample icon       : logomakr.com/9PEKPe 
+Companies icon    : logomakr.com/7IIhMa 
+Colleagues icon   : logomakr.com/9DpYNn
+Login icon        : logomakr.com/0WxWgg
+Main icon         : logomakr.com/4gP5Qh
+Logout icon       : logomakr.com/0MTCRq
+
+-->

@@ -1,0 +1,15 @@
+body > header > div.header_right > h1 > span {
+    color: red;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row-gap: 5px;
+    text-align: left;
+    margin-left: 30px;
+}
+
+input[type=checkbox] {
+    transform: scale(1.5);
+}

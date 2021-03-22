@@ -1,0 +1,54 @@
+/* style the idea form */
+.radio_grid {
+    display: grid;
+    grid-template-areas: "left right right right" "left right right right";
+    align-content: center;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.left {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.right {
+    width: 100%;
+}
+
+ul {
+    display: grid;
+    grid-template-columns: auto auto;
+    list-style-type: none;
+    padding-right: 30px;
+}
+
+li {
+    padding: 10px;
+}
+
+li:first-child, li:nth-child(2) {
+    border-bottom: 1px solid gainsboro;
+}
+
+li:first-child, li:nth-child(3) {
+    border-right: 1px solid gainsboro;
+}
+
+li:hover {
+    background-color: AntiqueWhite;
+}
+
+input:checked {
+    color: beige;
+}
+
+/* style monitor_box */
+#monitor_box {
+    position: relative;
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: justify;
+}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/create_box.css') }} " />
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/idea_box.css') }} " />
+{% endblock css %}
+
+{% block header_left %}
+    {% include 'component/logo.html' %}
+{% endblock header_left %}
+
+{% block header_right %}
+    {% include 'component/idea_box_preview.html' %}
+{% endblock header_right %}
+
+{% block content %}
+<main class="idea_box">
+    <section class="ideas">
+        {% for idea in ideas %}
+            <div class="idea{{' darker' if loop.index % 2 == 0}}">
+                <div class="avatar_card {{'right' if loop.index % 2 == 0}}">
+                    <img 
+                    src="{{ url_for('static', filename = '/avatars/' + idea.avatar if idea.sign != 'incognito' else '/avatars/incognito-cut.svg') }}"
+                    alt="{{idea.sign}}'s avatar"
+                    />
+                    <p>{{idea.sign}}</p>
+                    <p class="position">{{idea.position}}</p>
+                    <div class="edit_button">
+                        <!-- add edit buttons the idea's owner -->
+                        {% if (idea.colleague_id == current_user.id and box.is_open) or current_user.is_admin %}
+                        <button onclick="window.location = '/create_idea/{{box.id}}/{{idea.id}}';">Edit</button>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- add delete button to the authorized user -->
+                {% if (idea.colleague_id == current_user.id and box.is_open) or current_user.is_admin  %}
+                <div class="delete delete_{{'left' if loop.index % 2 == 0 else 'right'}}">
+                    <a title="Delete this idea" onclick="window.location = '/delete_idea/{{idea.id}}';" >
+                        <span>&times;</span>
+                    </a>
+                </div>
+                {% endif %}
+                <div class="speech_container">
+                    <p class="speech" data-idea="{{idea.idea}}">{{idea.idea}}</p>
+                </div>
+                <div class="time_{{'left' if loop.index % 2 == 0 else 'right'}}">
+                    <span class="date">{{idea.create_at}}</span>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+    <!-- Render button if the Idea Box still open, othervise close the Box -->
+    {% if box.is_open %}
+    <div class="button">
+        <a href="/create_idea/{{box.id}}/0" title="Click to Share Your Idea">Share my Idea</a>
+    </div>  
+    {% else %}
+    <div class="center">
+        <p>This Idea Box already closed.</p>
+    </div>
+    {% endif %}
+</main>
+{% endblock content %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="{{ url_for('static', filename = 'js/custom_date.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/idea_box_preview.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/idea_box.js') }}"></script>
+{% endblock script %}
+
+<!-- 
+    Credit:
+    incognito: Photo by Ryanniel Masucol from Pexels: https://images.pexels.com/photos/6505027/pexels-photo-6505027.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+-->

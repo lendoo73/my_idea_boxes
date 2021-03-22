@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/landing-page.css') }} " />
+{% endblock css %}
+
+{% block header_left %}
+    <img src="{{url_for('static', filename = 'images/idea-box.svg') }}" alt="Idea Box" />
+{% endblock header_left %}
+
+{% block header_right %}
+    <h1>Idea Box</h1>
+    <p>Idea Box is a solution for employers to gain unique and innovative ideas directly from the employees.</p>
+{% endblock header_right %}
+
+{% block content %}
+<main>
+    <section class="grid">
+        <div class="card">
+            <h2>Price it?</h2>
+            <img src="{{ url_for('static', filename='images/price.svg') }} " alt="coins" />
+            <p>Register your company for free.
+                <br />No fee.
+                <br />No advertising.
+            </p>
+        </div>
+        <div class="card">
+            <h2>Plan it!</h2>
+            <img src="{{ url_for('static', filename='images/plan.png') }}" alt="calendar" />
+            <p>Create your own Idea Box in a few user-friendly steps.
+                <br />Invite your colleges to join.
+            </p>
+        </div>
+        <div class="card">
+            <h2>Make it!</h2>
+            <img src="{{ url_for('static', filename='images/make.png') }}" alt="construction" />
+            <p>Enjoy the benefits of collective wisdom.
+                <br />Inprove the working place or working flow rapidly.
+            </p>
+        </div>
+    </section>
+    <div class="button">
+        <a href="{{ url_for('register_company') }}">Register your company</a>
+    </div>
+    <section class="proverb">
+        <h2>To make a good idea more than just an idea...</h2>
+        <hr />
+        <h3>Is your company already registered?</h3>
+        <div class="button">
+            <a href="{{ url_for('register') }}">Registration for colleagues</a>
+        </div>
+        
+    </section>
+    <section id="sample" class="card">
+        <h2>Try it!</h2>
+        <p>Try it before Registration...</p>
+        <p>Log in to the sample company and try the Idea Box before register your company.</p>
+    </section>
+    <div class="button">
+        <a href="{{ url_for('sample') }}">Sample Company</a>
+    </div>
+    
+</main>
+{% endblock content %}

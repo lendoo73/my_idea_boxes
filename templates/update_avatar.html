@@ -1,0 +1,17 @@
+{% extends "update.html" %}
+
+{% block css %}
+    {% if avatar %}
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'style/update_avatar.css') }} " />
+    {% endif %}
+{% endblock css %}
+
+{% block update %}
+
+{{ form.avatar.label }}<br />
+{{ form.avatar }}<br />
+{% for error in form.avatar.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+{% endfor %}
+
+{% endblock update %}

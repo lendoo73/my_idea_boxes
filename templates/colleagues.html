@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/profile.css') }} " />
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/colleagues.css') }} " />
+{% endblock css %}
+
+{% block header_left %}
+    {% include 'component/logo.html' %}
+{% endblock header_left %}
+
+{% block header_right %}
+    <h1>Colleagues</h1>
+    <div class="button">    
+        <a href="/register" title="Help your colleague at registration">Register new Colleage</a>
+    </div>
+    <h3 title="Scroll down to select record">or Update/Delete records.</h3>
+{% endblock header_right %}
+
+{% block content %}
+<main class="colleagues">
+    <section>
+        <table id="filterable_table">
+            <caption>Registered Colleagues</caption>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Position</th>
+            </tr>
+            <tr class="filter">
+                <th><input type="text" id="first_name" name="first_name" onkeyup="filter_by('first_name')" placeholder="filter by first name" /></th>
+                <th><input type="text" id="last_name" name="last_name" onkeyup="filter_by('last_name')" placeholder="filter by last name" /></th>
+                <th><input type="text" id="username" name="username" onkeyup="filter_by('username')" placeholder="filter by username" /></th>
+                <th><input type="text" id="email" name="email" onkeyup="filter_by('email')" placeholder="filter by email" /></th>
+                <th><input type="text" id="position" name="position" onkeyup="filter_by('position')" placeholder="filter by position" /></th>
+            </tr>
+            {% for colleague in colleagues %}
+            <tr 
+                class="clickable" 
+                onclick="window.location='/profile/' + {{colleague.id}};"
+                title="Click to update"
+            >
+                <td>{{colleague.first_name}}</td>
+                <td>{{colleague.last_name}}</td>
+                <td>{{colleague.user_name}}</td>
+                <td>{{colleague.email}}</td>
+                <td>{{colleague.position}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+    
+</main>
+{% endblock content %}
+
+{% block script %}
+<script src="{{ url_for('static', filename = 'js/colleagues.js') }}"></script>
+{% endblock script %}

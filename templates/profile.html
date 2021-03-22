@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/profile.css') }} " />
+{% endblock css %}
+
+{% block header_left %}
+    <a href="{{ url_for('upload_avatar', id = colleague.id) }}">
+        <img 
+            src="{{ url_for('static', filename = '/avatars/' + avatar) }}"
+            alt="{{colleague.username}} profile picture"
+            title="Change your avatar"
+        />
+    </a>
+{% endblock header_left %}
+
+{% block header_right %}
+    {% if colleague == current_user %}
+    <h1>My profile</h1>
+    {% else %}
+    <h1>Update Colleague profile</h1>
+    {% endif %}
+    <h2>User name: <strong>{{colleague.user_name}}</strong></h2>
+{% endblock header_right %}
+
+{% block content %}
+<main class="profile">
+    <section>
+        <table>
+            <tr class="clickable" id="first_name" onclick="window.location='/update_first_name/{{ colleague.id }}';">
+                <td>First name</td><td>{{colleague.first_name}}</td>
+            </tr>
+            <tr class="clickable" id="last_name" onclick="window.location='/update_last_name/{{ colleague.id }}';">
+                <td>Last name</td><td>{{colleague.last_name}}</td>
+            </tr>
+            <tr class="clickable" id="email" onclick="window.location='/update_email/{{ colleague.id }}';">
+                <td>Email</td><td>{{colleague.email}}</td>
+            </tr>
+            <tr class="clickable" id="position" onclick="window.location='/update_position/{{ colleague.id }}';">
+                <td>Position</td><td>{{colleague.position}}</td>
+            </tr>
+            <tr class="clickable" id="password" onclick="window.location='/update_password/{{ colleague.id }}';">
+                <td>Current Password</td><td>********</td>
+            </tr>
+            <tr class="clickable" id="delete" onclick="window.location='/delete_colleague/{{ colleague.id }}';">
+                <td class="center" colspan="2">Delete registration</td>
+            </tr>
+        </table>
+    </section>
+</main>
+
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}

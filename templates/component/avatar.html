@@ -1,0 +1,14 @@
+{% if avatar %}
+    <a href="{{ url_for('upload_avatar', id = colleague.id) }}">
+        <img class="float_left" src="{{ url_for('static', filename = '/avatars/' + avatar) }}" alt="profile picture" />
+        {% if type == "Avatar" and colleague.avatar %}
+            <a class="delete" title="Remove avatar" onclick="window.location='/remove_avatar/{{colleague.id}}';" >
+                <span>&times;</span>
+            </a>
+        {% endif %}
+    </a>
+{% else %}
+    <a href="{{ url_for('upload_logo') }}">
+        <img src="{{ url_for('static', filename = '/logo/' + logo) }}" alt="Company logo" />
+    </a>
+{% endif %}

@@ -1,0 +1,35 @@
+/* grid system for section */
+.grid {
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    grid-gap: 20px;
+    margin: 20px;
+}
+
+.grid img {
+    width: 100px;
+    height: 100px;
+}
+
+.proverb {
+    width: 100%;
+}
+
+.proverb {
+    text-align: center;
+}
+
+#sample {
+    margin: 0 auto;
+    width: 50%;
+}
+
+@media (max-width: 576px) {
+    .grid {
+        display: block;
+    }
+
+    #sample {
+        width: 80%;
+    }
+}

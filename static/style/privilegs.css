@@ -1,0 +1,41 @@
+
+
+th {
+    text-align: center;
+}
+
+#company_logo {
+    width: 70px;
+}
+
+#privilegs_logo {
+    width: 40px;
+}
+
+#colleague_logo {
+    width: 50px;
+}
+
+#box_logo {
+    width: 60px;
+}
+
+.privilegs td.center {
+    background-color: beige;
+}
+
+.admin_table {
+    margin-bottom: 20px;
+}
+
+.admin_table tr td:not(:first-of-type) {
+    text-align: center;
+    color: green;
+    font-size: 25px;
+}
+
+@media (max-width: 576px) {
+    nav img[src="static/icons/update_privilegs.svg"] {
+        filter: invert(100%) sepia(0%) brightness(200%);
+    }
+}

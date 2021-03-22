@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        section {
+            border: 1px solid black;
+            padding: 20px;
+        }
+
+        .flex_container {
+            display: flex;
+            background-color: beige;
+            height: 50vh;
+            align-items: center;
+        }
+
+        .flex_container > div {
+            width: 50%;
+        }
+
+        .left {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        img {
+            width: 60%;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .right {
+            padding: 60px 0;
+        }
+
+        article {
+            padding-left: 30px;
+        }
+
+        .code {
+            letter-spacing: 3px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .button {
+            margin: 40px 0;
+        }
+
+        .button a {
+            background-color: beige;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            color: black;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .phone {
+           display: none;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 5px;
+            }
+
+            .flex_container {
+                display: block;
+                text-align: center;
+            }
+
+            .flex_container>div {
+                width: 100%;
+            }
+
+            .left {
+                padding-bottom: 0;
+            }
+
+            img {
+                width: 40%;
+            }
+
+            .right {
+                padding: 0;
+                font-size: 0.8rem;
+            }
+
+            article {
+                padding-left: 15px;
+            }
+
+            .code {
+                letter-spacing: 3px;
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+            .button {
+                margin: 30px 0;
+            }
+
+            .button a {
+                padding: 15px;
+                font-size: 16px;
+            }
+
+            .phone {
+                display: block;
+                font-size: 12px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <section>
+
+        <header class="flex_container">
+            <div class="left">
+                <img class="logo" src="cid:logo" />
+            </div>
+            <div class="right">
+                <h1>Idea Box</h1>
+                <h2>Confirm your Email</h2>
+            </div>
+        </header>
+        <article>
+            <h3>Hi {{first_name}},</h3>
+            <p>This is a confirmation email before you login to the Idea Box.</p>
+            <h4>Please enter the following 6 digit to the confirmation field:</h4>
+            <p class="code">{{code}}</p>
+            <p>and click on</p>
+            <div class="button">
+                <a href="#" title="Not here. Go back to the Idea Box page, please.">Confirm my Email</a>
+            </div>
+            <p class="phone">(Not here.<br />
+                Go back to the Idea Box page, please.)
+            </p>
+        </article>
+    </section>
+</body>
+
+</html>

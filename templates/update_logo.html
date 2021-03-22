@@ -1,0 +1,11 @@
+{% extends "update.html" %}
+
+{% block update %}
+
+{{ form.logo.label }}<br />
+{{ form.logo }}<br />
+{% for error in form.logo.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+{% endfor %}
+
+{% endblock update %}

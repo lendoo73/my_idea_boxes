@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/idea_box.css') }} " />
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/create_box.css') }} " />
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/create_idea.css') }} " />
+{% endblock css %}
+
+{% block header_left %}
+    {% include 'component/logo.html' %}
+{% endblock header_left %}
+
+{% block header_right %}
+    {% include 'component/idea_box_preview.html' %}
+{% endblock header_right %}
+
+{% block content %}
+<main class="idea_box">
+    <section class="share_idea">
+        <div class="grid_container">
+            <div id="editor_box">
+                <form action="" method="post">
+                    {{ form.hidden_tag() }}
+                    <p>{{ form.idea.label }}</p>
+                    <p>{{ form.idea(
+                            placeholder = "Start typeing here...",
+                            title = "Hint: You can use even markdown to style your text."
+                        ) }}
+                        {% for error in form.idea.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <div class="radio_grid">
+                        <div class="left">{{ form.sign.label }}</div>
+                        <div class="right">{{ form.sign }}
+                            {% for error in form.sign.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="button">{{ form.submit() }}</div>
+                </form>
+            </div>
+            <div id="monitor_box">
+                <div id="idea_container">
+                    <div class="avatar_card">
+                        <img 
+                        src="{{ url_for('static', filename = '/avatars/' + avatar) }}"
+                        alt="{{form.sign.data}}'s avatar"
+                        />
+                        <!-- display the previously choosed sign or first name by default -->
+                        <p id="sign_container">{{form.sign.data}}</p>
+                        <p class="position">{{colleague.position}}</p>
+                        <div class="edit_button">
+                            <!-- add edit buttons the idea's owner -->
+                            <button onclick="alert('Hello world!')">Edit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="speech_container">
+                </div>
+            </div>
+            
+        </div>
+    </section>
+</main>
+{% endblock content %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="{{ url_for('static', filename = 'js/custom_date.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/idea_box_preview.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/create_idea.js') }}"></script>
+{% endblock script %}

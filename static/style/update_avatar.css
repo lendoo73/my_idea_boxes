@@ -1,0 +1,17 @@
+.float_left {
+    float: left;
+}
+
+.delete {
+    float: left;
+    color: red;
+    font-size: 35px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.delete:hover {
+    --text_shadow: black;
+    text-shadow: -1px 0px var(--text_shadow), 0px 1px var(--text_shadow), 1px 0px var(--text_shadow), 0px -1px var(--text_shadow);
+}
+  

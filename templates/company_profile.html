@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/profile.css') }} " />
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/company_profile.css') }} " />
+{% endblock css %}
+
+{% block header_left %}
+    <a href="{{ url_for('upload_logo') }}">
+        <img src="{{ url_for('static', filename = 'logo/' + logo) }}" alt="Company logo" />
+    </a>
+{% endblock header_left %}
+
+{% block header_right %}
+    <h1>My Company Profile</h1>
+{% endblock header_right %}
+
+{% block content %}
+<main class="company_profile">
+    <section>
+        <table>
+            <caption>Update name or password</caption>
+            <tr class="clickable" onclick="window.location='/update_company_name';">
+                <td>Company name</td><td>{{company.name}}</td>
+            </tr>
+            <tr class="clickable" onclick="window.location='/update_joining_password';">
+                <td>Joining Password</td><td>********</td>
+            </tr>
+        </table>
+    </section>
+    <section class="colleagues">
+        <table>
+            <caption>Authorized Colleagues to update Company profile</caption>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Username</th>
+                <th>email</th>
+                <th>position</th>
+            </tr>
+            {% for admin in company_admins %}
+            <tr class="clickable" onclick="window.location='/update_privilegs/' + {{admin.Colleagues.id}};">
+                <td>{{admin.Colleagues.first_name}}</td>
+                <td>{{admin.Colleagues.last_name}}</td>
+                <td>{{admin.Colleagues.user_name}}</td>
+                <td>{{admin.Colleagues.email}}</td>
+                <td>{{admin.Colleagues.position}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="button">
+            <a 
+                id="delete" 
+                href="/delete_company" 
+                title="Permanently delete this company!"
+                onclick="wait()"
+            >Delete my Company</a>
+        </div>  
+    </section>
+</main>
+
+{% endblock content %}
+
+{% block script %}
+<script src="{{ url_for('static', filename = 'js/company_profile.js') }}"></script>
+{% endblock script %}

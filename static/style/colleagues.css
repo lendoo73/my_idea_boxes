@@ -1,0 +1,62 @@
+body {
+    overflow-x: hidden;
+}
+
+.clickable {
+    overflow-wrap: anywhere;
+}
+
+.button {
+    text-align: left;
+    margin-left: 0;
+}
+
+.button a {
+    background-color: snow;
+}
+
+table {
+    width: 100%;
+}
+
+#colleagues_table th {
+    background-color: beige;
+}
+
+#colleagues_table .filter th {
+    background-color: lightgray;
+}
+
+#colleagues_table th input {
+    width: 100%;
+}
+
+@media (max-width: 1200px) {
+    section {
+        padding: 20px 1px;
+    }
+
+    .colleagues td,
+    .colleagues th {
+        padding: 6px;
+    }
+
+    .filter input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .colleagues td,
+    .colleagues th {
+        padding: 4px;
+    }
+
+    .filter input {
+        width: 100%;
+    }
+
+    .button {
+        margin: 40px;
+    }
+}

@@ -1,0 +1,17 @@
+{% extends "update.html" %}
+
+{% block update %}
+
+{{ form.email.label }}<br />
+{{ form.email(size = 32, placeholder="example@mail.com", autofocus = true, value = value) }}<br />
+{% for error in form.email.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+{% endfor %}
+
+{{ form.password.label }}<br>
+{{ form.password(size = 32, placeholder = placeholder) }}<br />
+{% for error in form.password.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+{% endfor %}
+
+{% endblock update %}

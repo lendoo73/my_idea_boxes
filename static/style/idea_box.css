@@ -1,0 +1,141 @@
+/* style the description of idea box */
+.header_right {
+    margin: 0 auto;
+}
+
+section.idea_box {
+    padding: 10px 50px;
+    border: 1px solid black;
+    background-color: azure;
+    margin: 30px;
+}
+
+#header_container {
+    text-align: center;
+}
+
+#content_container {
+    text-align: justify;
+}
+
+
+/* ---------- style the idea section ---------- */
+.ideas {
+    width: 80%;
+    margin: 0 auto 50px;
+}
+
+.idea {
+    position: relative;
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: justify;
+}
+
+.darker {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+.speech {
+    padding: 0px 10px 20px 10px;
+}
+
+.idea::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* style the avatar-card */
+
+.avatar_card {
+    float: left;
+    max-width: 120px;
+    width: 100%;
+    margin-right: 30px;
+    text-align: center;
+    font-family: arial;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+    background-color: white;
+}
+
+.avatar_card p {
+    margin: 5px;
+}
+
+.avatar_card.right {
+    float: right;
+    margin-left: 30px;
+    margin-right: 0;
+}
+
+.avatar_card img {
+    width: 100%;
+}
+
+.position {
+    color: grey;
+    font-size: 18px;
+}
+
+.edit_button button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+.delete_right {
+    right: 5px;
+}
+
+.delete_left { 
+    left: 5px;
+}
+
+.time_left, 
+.time_right {
+    position: absolute;
+    bottom: 5px;
+}
+
+.time_right {
+    float: right;
+    color: #aaa;
+    right: 10px;
+}
+
+.time_left {
+    float: left;
+    color: #999;
+    left: 10px;
+}
+
+@media (max-width: 767px) {
+    header {
+        display: block;
+    }
+
+    .header_left,
+    .header_right {
+        padding: 0;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    section.idea_box {
+        margin: 20px;
+        padding: 30px;
+    }
+}

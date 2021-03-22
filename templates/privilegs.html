@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/profile.css') }} " />
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/colleagues.css') }} " />
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/privilegs.css') }} " />
+{% endblock css %}
+
+{% block header_left %}
+    {% include 'component/logo.html' %}
+{% endblock header_left %}
+
+{% block header_right %}
+    <h1>Add, remove privilegs to Colleagues</h1>
+{% endblock header_right %}
+
+{% block content %}
+<main class="privilegs">
+    <section>
+        <table class="admin_table">
+            <caption>Colleagues with privilegs</caption>
+            <tr>
+                <th>Name</th>
+                <th title="Update company">
+                    <img id="company_logo" src="{{ url_for('static', filename = 'logo/' + logo) }}" alt="Company logo" />
+                </th>
+                <th title="Update privilegs">
+                    <img id="privilegs_logo" src="{{ url_for('static', filename = 'icons/update_privilegs.png') }}" alt="Add/Remove privilegs logo" />
+                </th>
+                <th title="Update colleague">
+                    <img id="colleague_logo" src="{{ url_for('static', filename = 'icons/update_colleague.png') }}" alt="Update colleague logo" />
+                </th>
+                <th title="Update Idea Box">
+                    <img id="box_logo" src="{{url_for('static', filename = 'images/idea-box.svg') }}" alt="Update Idea Box logo" />
+                </th>
+            </tr>
+            {% for admin in admins %}
+            <tr id="colleague{{admin.Admins.colleague.id}}" class="clickable" onclick="window.location='/update_privilegs/{{ admin.Admins.colleague.id }}'">
+                <td>{{admin.Admins.colleague.fullname()}}</td>
+                <td>
+                    {% if admin.Admins.update_company %}
+                    <span>&#10004;</span>
+                    {% else %}
+                    <span>&#10060;</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if admin.Admins.update_privilegs %}
+                    <span>&#10004;</span>
+                    {% else %}
+                    <span>&#10060;</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if admin.Admins.update_colleague %}
+                    <span>&#10004;</span>
+                    {% else %}
+                    <span>&#10060;</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if admin.Admins.update_box %}
+                    <span>&#10004;</span>
+                    {% else %}
+                    <span>&#10060;</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <table id="filterable_table">
+            <caption>Colleagues without privilegs</caption>
+            <tr class="table_header">
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Position</th>
+            </tr>
+            <tr class="filter">
+                <th><input type="text" id="first_name" name="first_name" onkeyup="filter_by('first_name')" placeholder="filter by first name" /></th>
+                <th><input type="text" id="last_name" name="last_name" onkeyup="filter_by('last_name')" placeholder="filter by last name" /></th>
+                <th><input type="text" id="username" name="username" onkeyup="filter_by('username')" placeholder="filter by username" /></th>
+                <th><input type="text" id="email" name="email" onkeyup="filter_by('email')" placeholder="filter by email" /></th>
+                <th><input type="text" id="position" name="position" onkeyup="filter_by('position')" placeholder="filter by position" /></th>
+            </tr>
+            {% for colleague in colleagues %}
+            <tr id="colleague{{colleague.id}}" class="clickable" onclick="window.location='/update_privilegs/{{ colleague.id }}'">
+                <td>{{colleague.first_name}}</td>
+                <td>{{colleague.last_name}}</td>
+                <td>{{colleague.user_name}}</td>
+                <td>{{colleague.email}}</td>
+                <td>{{colleague.position}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+            
+    </section>
+        
+</main>
+{% endblock content %}
+
+{% block script %}
+<script src="{{ url_for('static', filename = 'js/colleagues.js') }}"></script>
+{% endblock script %}

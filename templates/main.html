@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/main.css') }} " />
+{% endblock css %}
+
+{% block header_left %}
+    {% include 'component/logo.html' %}
+{% endblock header_left %}
+
+{% block header_right %}
+    <h2>Where your ideas can come true.</h2>
+    {% if update_box %}
+    <div class="button">    
+        <a href="{{url_for('create_box', id = 0)}}" title="Click to Create New Idea Box">Create New Idea Box</a>
+    </div>
+    {% else %}
+    <h1>Idea Box</h1>
+    {% endif %}
+{% endblock header_right %}
+
+{% block content %}
+<main class="main">
+    {% if not boxes %}
+    <header>
+        {% if update_box %}
+        <a href="{{url_for('create_box', id = 0)}}" title="Click to Create New Idea Box">
+        {% endif %}
+        <h1>There is not Idea Box created</h1>
+        {% if update_box %}
+        </a>
+        {% endif %}
+            
+    </header>
+    {% else %}
+    <header>
+        <h1>The most recent Ideas</h1>
+    </header>
+    <section>
+        <div class="box_header">
+            <div class="flex">
+                {% if update_box %}
+                <div class="edit">Edit</div>
+                {% endif %}
+                <div class="name">Idea Box</div>
+                <div class="poster">Poster</div>
+                <div class="ideas">Ideas</div>
+                <div class="close">Closing</div>
+                <div class="activity">Activity</div>
+            </div>
+        </div>
+        <div class="box_body">
+            {% for box in boxes %}
+            <div class="box_container flex" onclick="window.location='/idea_box/{{ box.Boxes.id }}'" >
+                {% if update_box %}
+                <div class="edit" onclick="event.stopPropagation(); window.location='/create_box/{{ box.Boxes.id }}';"  title="Edit {{box.Boxes.name}}" ><img src="{{ url_for('static', filename = 'icons/edit.png') }}" /></div>
+                {% endif %}
+                <div class="name" title="Go to the {{box.Boxes.name}} Idea Box" >{{box.Boxes.name}}</div>
+                <div class="poster">
+                    {% if box.Boxes.posters %}
+                    {% for poster in box.Boxes.posters %}
+                    <div 
+                        style="
+                            background-image: url({{ url_for('static', filename = 'avatars/' + poster['avatar']) }});"
+                        title="{{poster['name']}}"
+                    > 
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>Be the first and post your Idea.</p>
+                    {% endif %}
+                </div>
+                <div 
+                    class="ideas"
+                    title="{{box.Boxes.counter}} idea(s) posted."
+                >{{box.Boxes.counter}}</div>
+                <div class="close" data-close_at="{{box.Boxes.close_at}}">?</div>
+                <div class="activity" data-activity="{{box.Boxes.activity}}">?</div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</main>
+{% endblock content %}
+
+{% block script %}
+<script src="{{ url_for('static', filename = 'js/custom_date.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/main.js') }}"></script>
+{% endblock script %}

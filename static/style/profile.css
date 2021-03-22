@@ -1,0 +1,30 @@
+/* to make the table responsive */
+section {
+    overflow-x: auto;
+    padding: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    border:  1px solid black;
+    margin: 0 auto;     /* to positional center the table */ 
+    box-shadow: 10px 10px 5px grey;
+}
+
+td, th {
+    border:  1px solid black;
+    text-align: left;
+    padding: 8px 16px;
+}
+
+td {
+    cursor: pointer;
+}
+  
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.clickable:hover {
+    background-image: linear-gradient(lightgrey, white, lightgrey);
+}

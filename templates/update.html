@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block css %}
+{% endblock css %}
+
+{% block header_left %}
+    {% include 'component/avatar.html' %}
+{% endblock header_left %}
+
+{% block header_right %}
+    <h1>Update {{type}}</h1>
+    {% if value %}
+        <h2>Current {{type}}: 
+            <br /><strong>{{value}}</strong></h2>
+    {% endif %}
+    
+{% endblock header_right %}
+
+{% block content %}
+<main class="update">
+    
+    {% if enctype %}
+    <form action="" method="post" enctype="multipart/form-data">
+    {% else %}
+    <form action="" method="post">
+    {% endif %}
+        <div class="card">
+            {{ form.hidden_tag() }}
+            <p>
+                {% block update %}
+                {% endblock update %}
+            </p>
+        </div>
+        <div class="button">{{ form.submit() }}</div>
+    </form>
+</main>
+{% endblock content %}

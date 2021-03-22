@@ -1,0 +1,50 @@
+{% extends "update.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style/update_privilegs.css') }} " />
+{% endblock css %}
+
+{% block header_right %}
+    <h1>
+        Updata 
+        <span onclick="window.location='/profile/{{ colleague.id }}'">{{colleague.fullname()}}</span> 
+        privilegs
+    </h1>
+    <p onclick="window.location='/update_email/{{ colleague.id }}';">Email: {{colleague.email}}</p>
+    <p onclick="window.location='/update_position/{{ colleague.id }}';">Position: {{colleague.position}}</p>
+{% endblock header_right %}
+
+{% block update %}
+<section class="grid">
+    <div>{{ form.update_company.label }}</div>
+    <div>{{ form.update_company(checked = admin.update_company) }}</div>
+    {% for error in form.update_company.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    
+    <div>{{ form.update_privilegs.label }}</div>
+    <div>{{ form.update_privilegs(checked = admin.update_privilegs) }}</div>
+    {% for error in form.update_privilegs.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    
+    <div>{{ form.update_colleague.label }}</div>
+    <div>{{ form.update_colleague(checked = admin.update_colleague) }}</div>
+    {% for error in form.update_colleague.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    
+    <div>{{ form.update_box.label }}</div>
+    <div>{{ form.update_box(checked = admin.update_box) }}</div>
+    {% for error in form.update_box.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    
+</section>
+    <hr />
+    {{ form.password.label }}<br>
+    {{ form.password(size = 32, placeholder = "Enter your password") }}<br />
+    {% for error in form.password.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    {% endblock update %}

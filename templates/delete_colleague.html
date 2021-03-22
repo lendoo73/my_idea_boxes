@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block css %}
+{% endblock css %}
+
+{% block header_left %}
+    {% include 'component/avatar.html' %}
+{% endblock header_left %}
+
+{% block header_right %}
+    <h1>Delete Registration</h1>
+    <p>
+        Name: {{colleague.fullname()}}<br />
+        Email: {{colleague.email}}<br />
+        Position: {{colleague.position}}<br />
+
+    </p>
+{% endblock header_right %}
+
+{% block content %}
+<main class="delete_colleague">
+    
+    {% if enctype %}
+    <form action="" method="post" enctype="multipart/form-data">
+    {% else %}
+    <form action="" method="post">
+    {% endif %}
+        <div class="card">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.password.label }}<br />
+                {{ form.password(size = 32, placeholder = placeholder, autofocus = true) }}<br />
+                    {% for error in form.password.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+            </p>
+        </div>
+        <div class="button">{{ form.submit() }}</div>
+    </form>
+</main>
+{% endblock content %}

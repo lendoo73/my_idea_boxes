@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/confirm_email.css') }} " />
+{% endblock css %}
+
+{% block header_left %}
+    {% include 'component/logo.html' %}
+{% endblock header_left %}
+
+{% block header_right %}
+    <h1>Idea Box</h1>
+    <h2>Confirm your Email</h2>
+{% endblock header_right %}
+
+{% block content %}
+<main class="confirm_email">
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <div class="card">
+            <p>
+                {{ form.code.label }}<br />
+                {{ form.code(
+                    placeholder = "6 digit", 
+                    title = "Check your mailbox and enter 6 digit here"
+                ) }}<br />
+                {% for error in form.code.errors %}
+                    <p style="color: red;">{{ error }}</p>
+                {% endfor %}
+            </p>
+        </div>
+        <div class="button">{{ form.submit() }}</div>
+    </form>
+</main>
+{% endblock content %}

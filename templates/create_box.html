@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/create_box.css') }} " />
+{% endblock css %}
+
+{% block header_left %}
+    {% include 'component/logo.html' %}
+{% endblock header_left %}
+
+{% block header_right %}
+{% if id > 0 %}
+<h2>Create new Idea Box</h2>
+{% else %}
+<h2>Edit Idea Box</h2>
+{% endif %}
+{% endblock header_right %}
+
+{% block content %}
+<main class="grid_container">
+    <div id="editor_box">
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>{{ form.name.label }}</p>
+            <p>
+                {{ form.name(placeholder = "Title") }}
+                {% for error in form.name.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.description.label }}</p>
+            <p>{{ form.description(placeholder = "# you can use Markdown...") }}
+                {% for error in form.description.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.close_at.label }}</p>
+            <div class="float">
+                <div class="left">
+                    <p>{{ form.close_at }}
+                        {% for error in form.close_at.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                </div>
+                <div class="right">
+                    <p class="button">{{ form.submit() }}</p>
+                </div>
+            </div>
+        </form>
+        {% if id > 0 %}
+        <div class="delete">
+            <a title="Delete this Idea Box" onclick="window.location = '/delete_box/{{id}}';" >
+                <span>&times;</span>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    <div id="monitor_box">
+        <div id="header_container"></div>
+        <div id="content_container"></div>
+        <div id="close_at_container"></div>
+    </div>
+    
+</main>
+{% endblock content %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="{{ url_for('static', filename = 'js/custom_date.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/create_box.js') }}"></script>
+{% endblock script %}

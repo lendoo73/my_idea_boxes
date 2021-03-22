@@ -1,0 +1,11 @@
+{% extends "update.html" %}
+
+{% block update %}
+
+{{ form.company_name.label }}<br />
+{{ form.company_name(size = 32, placeholder="Company Name", value = value, autofocus = true) }}<br />
+{% for error in form.company_name.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+{% endfor %}
+
+{% endblock update %}

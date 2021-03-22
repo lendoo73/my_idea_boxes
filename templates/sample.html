@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/profile.css') }} " />
+<link rel="stylesheet" href="{{ url_for('static', filename = 'style/colleagues.css') }} " />
+{% endblock css %}
+
+{% block header_left %}
+    <img src="{{url_for('static', filename = 'images/idea-box.svg') }}" alt="Idea Box" />
+{% endblock header_left %}
+
+{% block header_right %}
+    <h1>Idea Box</h1>
+    <h2>Sample Company</h2>
+    <p>Company name: Eric BLABLA KGB</p>
+    <p>Password for Colleagues to Joining: bbb</p>
+    <h3>Log in to the sample company</h3>
+    <p>Please use the following login parameters:</p>
+{% endblock header_right %}
+
+{% block content %}
+<main class="sample">
+    <section>
+        <table>
+            <caption>Registered Colleagues</caption>
+            <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+            {% for colleague in colleagues %}
+            <tr 
+                class="clickable" 
+                onclick="fill_login_form('{{colleague.user_name}}');"
+                title="Click to login to this user account."
+            >
+                <td>{{colleague.user_name}}</td>
+                <td>{{colleague.email}}</td>
+                <td>aaa</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+
+</main>
+{% endblock content %}
+
+{% block script %}
+<script src="{{ url_for('static', filename = 'js/sample.js') }}"></script>
+{% endblock script %}

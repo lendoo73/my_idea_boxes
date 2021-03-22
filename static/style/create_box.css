@@ -1,0 +1,98 @@
+.grid_container {
+    display: grid;
+    grid-template-columns: 50% auto;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.grid_container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px 0;
+}
+
+#editor_box {
+    position: relative;           /* .delete X positioned absolute in common.css */
+    background-color: #f8f8f8;
+}
+
+#editor_box .delete {
+    --distance: 20px;
+    top: var(--distance);
+    right: var(--distance);
+    transform: scale(2);
+}
+
+#editor_box,
+#monitor_box {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+#name {
+    width: 80%;
+    padding: 10px;
+    font-size: 18px;
+}
+
+#editor_box > form > p:nth-child(6) {
+    margin-bottom: 0;
+}
+
+#editor_box textarea {
+    width: 100%;
+    min-height: 250px;
+}
+
+.float .left {
+    float: left;
+}
+
+.float .right {
+    float: right;
+}
+
+#close_at {
+    padding: 14px 20px;
+    font-size: 16px;
+    margin-top: -13px;
+}
+
+.button {
+    margin: 6px 0 0 0;
+}
+
+#submit {
+    padding: 16px;;
+}
+
+#content_container {
+    text-align: justify;
+}
+
+@media (max-width: 767px) {
+    .float .left,
+    .float .right {
+        float: none;
+    }
+
+    .float .right input {
+        width: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .grid_container {
+        display: block;
+    }
+
+    .float .left input, 
+    .float .right input {
+        width: 80%;
+    }
+
+    #monitor_box {
+        min-height: 260px;
+    }
+
+}

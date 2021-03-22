@@ -1,0 +1,8 @@
+<!-- If the colleague has privileg to change the logo, add link: -->
+{% if change_logo %}
+<a href="{{ url_for('upload_logo') }}">
+{% endif %}
+    <img src="{{ url_for('static', filename = 'logo/' + logo) }}" alt="Company logo" />
+{% if change_logo %}
+</a>
+{% endif %}
