@@ -261,6 +261,10 @@ class Dom {
         this.element.src = path;
     }
     
+    // get relative path:
+    get relative_path() {
+        return this.element.attributes.getNamedItem("src").nodeValue.replace("/", "");
+    } 
     // --------------------------- data-attribute :
     get get_data() {
         return this.element.dataset;

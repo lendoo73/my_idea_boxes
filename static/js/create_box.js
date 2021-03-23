@@ -20,7 +20,6 @@ const long_format = () => {
 // display markdown in monitor when the page is loaded: (it is need in edit mode)
 header.markdown(title.val, "# ");
 content.markdown(description.val);
-console.log(close_at.val);
 if (close_at.val) {
     // only display if the user already choosed any date:
     close_at_container.markdown(close_at.val, "#### Closing time at: <br />", long_format);

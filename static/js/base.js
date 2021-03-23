@@ -32,8 +32,9 @@ if (device.width <= 576) {
     
     // store logo src in session storage
     if (!(sessionStorage.getItem("logo_src"))) {
-        sessionStorage.setItem("logo_src", company_logo.element ? company_logo.src : "");
+        sessionStorage.setItem("logo_src", company_logo.element ? company_logo.relative_path : "");
     }
+    sessionStorage.setItem("logo_src", company_logo.element ? company_logo.relative_path : "");
     const icon_src = {
         "Home": "static/icons/home.png",
         "Sample": "static/icons/sample.png",
