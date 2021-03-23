@@ -32,4 +32,9 @@
     #sample {
         width: 80%;
     }
+
+    .proverb .button a {
+        padding: 20px 8px;
+        font-size: 19px;
+    }
 }
