@@ -7,12 +7,11 @@ from flask_login import LoginManager
 
 database = "my_idea_box.db"
 app = Flask(__name__)
-#app.secret_key = os.getenv("APP_SECRET_KEY")
-app.secret_key = "my_secret_key"
+app.secret_key = os.getenv("APP_SECRET_KEY")
 """
 When we added PostgreSQL to our heroku project, it automatically created that DATABASE_URL environment variable for us. So when our code is run on Heroku, os.environ['DATABASE_URL'] should automatically point to the PostgreSQL database.
 """
-DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_URL = os.environ.get("DATABASE_URL").replace("postgres", "postgresql")
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL or f"sqlite:///{database}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
