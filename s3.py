@@ -20,14 +20,14 @@ def upload(file, bucket, file_name = None):
             Body = data
         )
         return True
-    except botocore.exceptions.ClientError as e:
+    except ClientError as e:
         print("error: ", e)
         return False
 
 def download(bucket_name, object_name, file_name = None):
     try:
         s3.Bucket(bucket_name).download_file(object_name, file_name or object_name)
-    except botocore.exceptions.ClientError as e:
+    except ClientError as e:
         if e.response['Error']['Code'] == "404":
             print("The object does not exist.")
         else:
