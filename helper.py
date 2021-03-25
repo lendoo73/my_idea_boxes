@@ -169,6 +169,8 @@ def authenticate_company(box_id, current_user):
 def get_avatar(current_user):
     # returns the avatar of current user
     extension = current_user.avatar
+    print("current_user.avatar: ", current_user.avatar)
+    print("extension: ", extension)
     if extension:
         file = f"{current_user.id}.{extension}"
         if not os.path.exists(f"static/avatars/{file}"):
