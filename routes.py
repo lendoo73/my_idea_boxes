@@ -12,6 +12,7 @@ from send_email import send_email
 from email_templates import confirm_email_txt, confirm_email_HTML
 from add_data import del_company, create_sample_company
 import sys
+import s3
 
 @app.route("/")
 def landing_page():
@@ -504,22 +505,21 @@ def upload_avatar(id):
 
     if form.validate_on_submit():
         filename = form.avatar.data.filename
-        print(dir(form.avatar.data))
-        print(form.avatar.data)
         extension = get_extension(filename)
         # delete previous avatar:
         old_extension = colleague.avatar
         if old_extension:
-            old_avatar = f"static/avatars/{colleague.id}.{old_extension}"
-            if os.path.exists(old_avatar):
-                os.remove(old_avatar)
+            remove_avatar_file(colleague, old_extension)
         
         # update colleague avatar:
         colleague.avatar = extension
         try:
             db.session.commit()
-            # save new avatar:
-            form.avatar.data.save(f"static/avatars/{colleague.id}.{extension}")
+            # save new avatar on Heroku:
+            new_file = f"avatars/{colleague.id}.{extension}"
+            form.avatar.data.save(f"static/{new_file}")
+            # upload to AWS:
+            s3.upload(new_file, os.environ["S3_BUCKET"], new_file)
             flash(f"Your profile photo successfully changed.", "inform")
         except:
             db.session.rollback()

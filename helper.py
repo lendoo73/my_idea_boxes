@@ -8,6 +8,7 @@ from models import Colleagues, Admins, Boxes
 from app import db
 import random
 import os
+import s3
 
 
 def print_current_user(current_user):
@@ -168,7 +169,16 @@ def authenticate_company(box_id, current_user):
 def get_avatar(current_user):
     # returns the avatar of current user
     extension = current_user.avatar
-    return f"{current_user.id}.{extension}" if extension else "default.png"
+    if extension:
+        file = f"{current_user.id}.{extension}"
+        if not os.path.exists(f"static/avatars/{file}"):
+            # download avatar from AWS:
+            bucket = os.environ["S3_BUCKET"]
+            object_name = f"avatars/{file}"
+            s3.download(bucket, object_name)
+        return file
+    else:
+        return "default.png"
 
 
 
@@ -240,7 +250,12 @@ def set_confirmation_code(colleague, confirmation_email = None):
         db.session.rollback()
         return False
 
-def remove_avatar_file(colleague):
-    avatar = f"static/avatars/{colleague.id}.{colleague.avatar}"
+def remove_avatar_file(colleague, extension = None):
+    bucket = os.environ["S3_BUCKET"]
+    file = f"avatars/{colleague.id}.{extension or colleague.avatar}"
+    avatar = f"static/{file}"
+    # remove from Heroku:
     if os.path.exists(avatar):
         os.remove(avatar)
+    # remove avatar from AWS:
+    s3.delete(bucket, file)
