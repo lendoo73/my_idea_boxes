@@ -520,7 +520,7 @@ def upload_avatar(id):
             new_file = f"avatars/{colleague.id}.{extension}"
             form.avatar.data.save(f"static/{new_file}")
             # upload to AWS:
-            print(s3.upload(f"static/{new_file}", os.environ["S3_BUCKET"], new_file))
+            s3.upload(f"static/{new_file}", os.environ["S3_BUCKET"], new_file)
             flash(f"Your profile photo successfully changed.", "inform")
         except:
             db.session.rollback()
