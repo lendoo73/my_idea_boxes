@@ -13,14 +13,18 @@ def delete(bucket, file):
     obj.delete()
 
 def upload(file, bucket, file_name = None):
+    print(file)
+    print(bucket)
+    print(file_name)
     try:
         data = open(file, 'rb')
         s3.Bucket(bucket).put_object(
-            Key = file_name or file.split("/")[-1], 
+            Key = file_name or file, 
             Body = data
         )
         return True
-    except:
+    except botocore.exceptions.ClientError as e:
+        print("error: ", e)
         return False
 
 def download(bucket_name, object_name, file_name = None):

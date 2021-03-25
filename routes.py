@@ -512,14 +512,15 @@ def upload_avatar(id):
             remove_avatar_file(colleague, old_extension)
         
         # update colleague avatar:
-        colleague.avatar = extension
+        if old_extension != extension:
+            colleague.avatar = extension
         try:
             db.session.commit()
             # save new avatar on Heroku:
             new_file = f"avatars/{colleague.id}.{extension}"
             form.avatar.data.save(f"static/{new_file}")
             # upload to AWS:
-            s3.upload(new_file, os.environ["S3_BUCKET"], new_file)
+            print(s3.upload(f"static/{new_file}", os.environ["S3_BUCKET"], new_file))
             flash(f"Your profile photo successfully changed.", "inform")
         except:
             db.session.rollback()
