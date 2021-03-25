@@ -13,9 +13,6 @@ def delete(bucket, file):
     obj.delete()
 
 def upload(file, bucket, file_name = None):
-    print(file)
-    print(bucket)
-    print(file_name)
     try:
         data = open(file, 'rb')
         s3.Bucket(bucket).put_object(
