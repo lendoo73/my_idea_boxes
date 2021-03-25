@@ -1,5 +1,7 @@
 /*  --------------------    Style footer    --------------------    */
 footer {
+    display: flex;
+    align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     text-align: left;
@@ -11,8 +13,22 @@ footer {
 
 footer img {
     height: 30px;
-    margin-top: -5px;
-    float: right;
+}
+
+#copiright {
+}
+
+#github_icon {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+#github_icon:hover {
+    filter: invert(5%) sepia(52%) saturate(187%) hue-rotate(14deg) brightness(105%) contrast(92%);
+}
+
+#codecademy_logo {
+    flex-grow: 2;
 }
 
 @media (max-width: 576px) {

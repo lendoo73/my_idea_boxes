@@ -65,10 +65,20 @@
         </header>
         {% block content %}
         {% endblock content %}
-        <footer> &copy; Developed by Csaba. <span id="developed">   2021</span><span id="presentYear">.</span>
-            <a href="https://www.codecademy.com/profiles/lendoo" target="_blank">
-                <img id="codecademy_logo" src="{{ url_for('static', filename='images/codecademy-white.svg') }}" alt="CodeCademy logo" />
-            </a>
+        <footer>
+            <div id="copiright">
+                &copy; Developed by Csaba. <span id="developed">   2021</span><span id="presentYear">.</span>
+            </div>
+            <div id="github_icon">
+                <a href="https://github.com/lendoo73/my_idea_boxes" target="_blank" title="Code on GitHub" >
+                    <img src="{{ url_for('static', filename = 'images/github_logo.png') }}" />
+                </a>
+            </div>
+            <div>
+                <a href="https://www.codecademy.com/profiles/lendoo" target="_blank">
+                    <img id="codecademy_logo" src="{{ url_for('static', filename = 'images/codecademy-white.svg') }}" alt="CodeCademy logo" />
+                </a>
+            </div>
         </footer>
         <script src="{{ url_for('static', filename = 'js/footer.js') }}"></script>
         <script src="{{ url_for('static', filename = 'js/dom.js') }}"></script>
@@ -78,15 +88,3 @@
         {% endblock script %}
     </body>
 </html>
-
-<!--
-Add privilegs icon: logomakr.com/0DzUMk 
-Home icon         : logomakr.com/793K3x
-Sample icon       : logomakr.com/9PEKPe 
-Companies icon    : logomakr.com/7IIhMa 
-Colleagues icon   : logomakr.com/9DpYNn
-Login icon        : logomakr.com/0WxWgg
-Main icon         : logomakr.com/4gP5Qh
-Logout icon       : logomakr.com/0MTCRq
-
--->
