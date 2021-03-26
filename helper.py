@@ -182,7 +182,7 @@ def get_avatar(current_user):
             print(f"download from S3: object_name = avatars/{file}")
             bucket = os.environ["S3_BUCKET"]
             object_name = f"avatars/{file}"
-            s3.download(bucket, object_name)
+            s3.download(bucket, object_name, f"static/{object_name}")
         return file
     else:
         return "default.png"
