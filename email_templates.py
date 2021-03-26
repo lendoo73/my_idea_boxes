@@ -18,7 +18,6 @@ Idea Box
 """
 
 def confirm_email_HTML(first_name, code):
-    print(session["url"])
     return render_template(
         "email_confirmation_template.html",
         first_name = first_name,
