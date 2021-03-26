@@ -25,7 +25,6 @@ def upload(file, bucket, file_name = None):
         return False
 
 def download(bucket_name, object_name, file_name = None):
-    print("file_name at DOWNLOAD:", file_name)
     try:
         s3.Bucket(bucket_name).download_file(object_name, file_name or object_name)
     except ClientError as e:

@@ -4,7 +4,7 @@ from models import Company, Colleagues, Admins, Boxes, Ideas
 from forms import RegistrationFormCompany, RegistrationFormColleague, LoginForm, ConfirmEmailForm, UpdateFirstNameForm, UpdateLastNameForm, UpdateEmailForm, UpdatePositionForm, UpdatePasswordForm, UpdateAvatarForm, allowed_format, UpdateLogoForm, UpdateCompanyNameForm, UpdateJoiningPasswordForm, DeleteColleagueForm, UpdatePrivilegsForm, CreateBoxForm, CreateIdeaForm
 from werkzeug.urls import url_parse
 from flask_login import current_user, login_user, logout_user, login_required
-from helper import print_current_user, instatiate_colleague, instatiate_admin, get_admin, get_admin_id, get_avatar, get_logo, unathorized, get_nav, get_placeholder, is_auth_company, is_auth_colleague, is_auth_privilegs, is_auth_box, update_authorization, remove_html, get_idea_box, authenticate_company, get_extension, set_confirmation_code, remove_avatar_file
+from helper import print_current_user, instatiate_colleague, instatiate_admin, get_admin, get_admin_id, get_avatar, get_logo, unathorized, get_nav, get_placeholder, is_auth_company, is_auth_colleague, is_auth_privilegs, is_auth_box, update_authorization, remove_html, get_idea_box, authenticate_company, get_extension, set_confirmation_code, remove_avatar_file, remove_logo_file
 from date import str_to_date, is_open
 import os                        # to delete uploaded avatar
 from sqlalchemy import func      # to use func in qurey
@@ -777,16 +777,18 @@ def upload_logo():
         company = Company.query.get(current_user.company_id)
         old_extension = company.logo
         if old_extension:
-            old_logo = f"static/logo/{company.id}.{old_extension}"
-            if os.path.exists(old_logo):
-                os.remove(old_logo)
+            remove_logo_file(company, old_extension)
         
         # update company logo:
-        company.logo = extension
+        if old_extension != extension:
+            company.logo = extension
         try:
             db.session.commit()
-            # save new logo:
-            form.logo.data.save(f"static/logo/{company.id}.{extension}")
+            # save new logo on Heroku:
+            new_file = f"logo/{company.id}.{extension}"
+            form.logo.data.save(f"static/{new_file}")
+            # upload to AWS:
+            print(s3.upload(f"static/{new_file}", os.environ["S3_BUCKET"], new_file))
             flash(f"Your company logo successfully changed.", "inform")
         except:
             db.session.rollback()
@@ -929,7 +931,9 @@ def colleagues():
     if not is_auth_colleague(current_user):
         return unathorized("You cannot to vew this page.", "error")
 
-    colleagues = Colleagues.query.filter(Colleagues.company_id == current_user.company_id).all()
+    colleagues = Colleagues.query.filter(
+        Colleagues.company_id == current_user.company_id
+    ).order_by(Colleagues.id).all()
 
     return render_template(
         "colleagues.html",

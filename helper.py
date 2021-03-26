@@ -169,17 +169,10 @@ def authenticate_company(box_id, current_user):
 def get_avatar(current_user):
     # returns the avatar of current user
     extension = current_user.avatar
-    print("***********************************************")
-    print("current_user: ", current_user)
-    print("current_user.avatar: ", current_user.avatar)
-    print("extension: ", extension)
-    print("***********************************************")
     if extension:
-        print(f"extension found: {current_user.id}.{extension}")
         file = f"{current_user.id}.{extension}"
         if not os.path.exists(f"static/avatars/{file}"):
             # download avatar from AWS:
-            print(f"download from S3: object_name = avatars/{file}")
             bucket = os.environ["S3_BUCKET"]
             object_name = f"avatars/{file}"
             s3.download(bucket, object_name, f"static/{object_name}")
@@ -194,8 +187,17 @@ def get_logo(current_user):
     id = current_user.company_id
     company = Company.query.get(id)
     logo_extension = company.logo
-    return f"{id}.{logo_extension}" if logo_extension else "idea-box.svg"
 
+    if logo_extension:
+        file = f"{id}.{logo_extension}"
+        if not os.path.exists(f"static/logo/{file}"):
+            # download logo from AWS:
+            bucket = os.environ["S3_BUCKET"]
+            object_name = f"logo/{file}"
+            s3.download(bucket, object_name, f"static/{object_name}")
+        return file
+    else:
+        return "idea-box.svg"
 
 def get_placeholder(colleague, current_user, form):
     placeholder = "Your current password"
@@ -265,4 +267,14 @@ def remove_avatar_file(colleague, extension = None):
     if os.path.exists(avatar):
         os.remove(avatar)
     # remove avatar from AWS:
+    s3.delete(bucket, file)
+
+def remove_logo_file(company, extension):
+    bucket = os.environ["S3_BUCKET"]
+    file = f"logo/{company.id}.{extension}"
+    old_logo = f"static/{file}"
+    # remove from Heroku:
+    if os.path.exists(old_logo):
+        os.remove(old_logo)
+    # remove logo from AWS:
     s3.delete(bucket, file)
