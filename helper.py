@@ -169,12 +169,17 @@ def authenticate_company(box_id, current_user):
 def get_avatar(current_user):
     # returns the avatar of current user
     extension = current_user.avatar
+    print("***********************************************")
+    print("current_user: ", current_user)
     print("current_user.avatar: ", current_user.avatar)
     print("extension: ", extension)
+    print("***********************************************")
     if extension:
+        print(f"extension found: {current_user.id}.{extension}")
         file = f"{current_user.id}.{extension}"
         if not os.path.exists(f"static/avatars/{file}"):
             # download avatar from AWS:
+            print(f"download from S3: object_name = avatars/{file}")
             bucket = os.environ["S3_BUCKET"]
             object_name = f"avatars/{file}"
             s3.download(bucket, object_name)

@@ -1,7 +1,7 @@
 from app import db
 from models import Company, Colleagues, Admins, Boxes, Ideas
 from flask import flash, redirect, url_for
-from helper import instatiate_admin, get_extension
+from helper import instatiate_admin, get_extension, remove_avatar_file
 import os
 import shutil # to copy files
 import random
@@ -21,9 +21,7 @@ def del_company(id):
     # delete all avatars:
     colleagues = Colleagues.query.filter_by(company_id = id).all()
     for colleague in colleagues:
-        avatar = f"static/avatars/{colleague.id}.{colleague.avatar}"
-        if os.path.exists(avatar):
-            os.remove(avatar)
+        remove_avatar_file(colleague)
 
     # delete company:
     try:
