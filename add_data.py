@@ -8,6 +8,7 @@ import random
 import lorem
 from date import today, add_day, str_to_date
 from sqlalchemy.exc import SQLAlchemyError
+import s3
 
 def del_company(id):
 
@@ -233,6 +234,8 @@ def create_sample_colleague(data):
         location = f"static/sample_avatars/{sample_avatar}"
         destination = f"static/avatars/{colleague.id}.{extension}"
         shutil.copy2(location, destination)
+        # upload to AWS:
+        print(s3.upload(location, os.environ["S3_BUCKET"], f"avatars/{sample_avatar}"))
     
         # update database with the copied avatar:
         colleague.avatar = extension
