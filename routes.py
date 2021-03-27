@@ -240,7 +240,9 @@ def confirm_email():
 def sample():
     
     sample_company = Company.query.filter_by(name = "Eric BLABLA KGB").first()
-    colleagues = Colleagues.query.filter(Colleagues.company_id == sample_company.id).all()
+    colleagues = Colleagues.query.filter(
+        Colleagues.company_id == sample_company.id
+    ).order_by(Colleagues.id).all()
 
     return render_template(
         "sample.html", 
