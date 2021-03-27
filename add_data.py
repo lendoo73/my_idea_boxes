@@ -235,7 +235,7 @@ def create_sample_colleague(data):
         destination = f"static/avatars/{colleague.id}.{extension}"
         shutil.copy2(location, destination)
         # upload to AWS:
-        print(s3.upload(location, os.environ["S3_BUCKET"], f"avatars/{sample_avatar}"))
+        print(s3.upload(location, os.environ["S3_BUCKET"], f"avatars/{colleague.id}.{extension}"))
     
         # update database with the copied avatar:
         colleague.avatar = extension
