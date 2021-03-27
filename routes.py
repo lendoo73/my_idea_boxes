@@ -254,6 +254,7 @@ def main():
 
     company = Company.query.get(current_user.company_id)
     company_id = company.id
+    get_avatar(current_user) # have to download avatar from AWS, otherwise the photo not rendered.
 
     # display existed Idea Boxes:
     boxes = db.session.query(Boxes, Admins, Colleagues).filter(

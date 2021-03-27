@@ -1,3 +1,5 @@
+# SMTPAuthenticationError: (534, b'5.7.14) solution:
+# https://joequery.me/guides/python-smtp-authenticationerror/
 from app import app
 import os
 from flask_mail import Mail, Message
