@@ -39,7 +39,7 @@ I built in four different privilegs:
     * but cannot to edit the sign of the colleagues.
 
 ## Colleagues:
-Any colleagues can write/update own Idea if an Idea Box created until the box is opened. If a box already closed, then a colleague with Update Idea Box privileg can reopen it if extend the closing time.
+Any colleagues can write/update own Idea if an Idea Box created until the box is opened. If a box already closed, then a colleague with Update Idea Box privileg can reopen by extending the closing time.
 
 #### [Database diagram](https://github.com/lendoo73/my_idea_boxes/blob/main/my_idea_box.pdf)
 
