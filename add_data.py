@@ -87,6 +87,7 @@ def create_sample_company():
     location = "static/sample_logo/blabla.png"
     destination = f"static/logo/{registered_colleague.company_id}.png"
     shutil.copy2(location, destination)
+    print(s3.upload(location, os.environ["S3_BUCKET"], f"logo/{registered_company.id}.png"))
 
     # update database:
     company.logo = "png"
